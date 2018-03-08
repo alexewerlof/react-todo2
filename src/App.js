@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import TodoList from './TodoList';
+import NewItem from './NewItem';
 
 const todos = [
   {
@@ -24,12 +25,34 @@ const todos = [
 ];
 
 class App extends Component {
-  render() {
-    return <div>
-        List of todo items:
-        <TodoList items={todos}></TodoList>
-    </div>;
-  }
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            todos
+        }
+    }
+
+    addTodoItem = (title) => {
+        console.log('submitted', title)
+        this.state.todos.push({
+            id: String(Math.random()),
+            prio: Math.round(Math.random() * 3),
+            done: Math.random() > 0.5,
+            title
+        })
+        this.setState({
+            todos: this.state.todos
+        });
+    }
+
+    render() {
+        return <div>
+            List of todo items:
+            <TodoList items={this.state.todos}></TodoList>
+            <NewItem submit={this.addTodoItem} />
+        </div>;
+    }
 }
 
 export default App;

@@ -14,7 +14,9 @@ export default class TodoList extends React.Component {
         const item = this.state.items.find(i => i.id === id);
         if (item) {
             item.done = !item.done;
-            this.setState({ items: this.state.items })
+            this.setState({
+                items: this.state.items
+            });
             console.log(item)
         } else {
             console.log('no item with id', id)
