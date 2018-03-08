@@ -7,6 +7,6 @@ export default function TodoItem(props) {
             type="checkbox"
             checked={props.done}
             onChange={event => props.toggleDone(props.id)} />
-        {props.title}
+        [{props.prio}] {props.title}
     </label>
 }

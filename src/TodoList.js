@@ -23,7 +23,9 @@ export default class TodoList extends React.Component {
 
     render() {
 
-        const listOfItems = this.state.items.map(item => <li key={item.id}>
+        const listOfItems = this.state.items
+            .sort((itemA, itemB) => itemA.prio - itemB.prio)
+            .map(item => <li key={item.id}>
             <TodoItem toggleDone={this.toggleDone} {...item} />
         </li>)
 
