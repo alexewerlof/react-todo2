@@ -3,11 +3,18 @@ import TodoItem from './TodoItem';
 
 export default class TodoList extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.state ={
+            items: props.items
+        }
+    }
 
     toggleDone = (id) => {
-        const item = this.props.items.find(i => i.id === id);
+        const item = this.state.items.find(i => i.id === id);
         if (item) {
             item.done = !item.done;
+            this.setState({ items: this.state.items })
             console.log(item)
         } else {
             console.log('no item with id', id)
@@ -16,12 +23,12 @@ export default class TodoList extends React.Component {
 
     render() {
 
-        const listOfItems = this.props.items.map(item => <li key={item.id}>
+        const listOfItems = this.state.items.map(item => <li key={item.id}>
             <TodoItem toggleDone={this.toggleDone} {...item} />
         </li>)
 
         return <div>
-            <p>{this.props.items.length} items:</p>
+            <p>{this.state.items.length} items:</p>
             <ul>
                 {listOfItems}
             </ul>
